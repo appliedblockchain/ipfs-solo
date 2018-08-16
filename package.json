@@ -1,0 +1,19 @@
+{
+  "name": "ipfs-solo",
+  "version": "1.0.0",
+  "description": "Private solo ipfs node, useful for development",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/test.js"
+  },
+  "author": "Rémi Bouchar",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "ipfs-api": "^24.0.0",
+    "mocha": "^5.2.0"
+  }
+}

@@ -1,0 +1,43 @@
+version: 2
+jobs:
+  build_master:
+    docker:
+      - image: docker:stable-git
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run: docker build -t appliedblockchain/ipfs-solo .
+      - run:
+          name: Push Docker image
+          command: |
+            echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin
+            docker push appliedblockchain/ipfs-solo
+  build_tag:
+    docker:
+      - image: docker:stable-git
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run: docker build -t appliedblockchain/ipfs-solo:$CIRCLE_TAG .
+      - run:
+          name: Push Docker image
+          command: |
+            echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin
+            docker push appliedblockchain/ipfs-solo:$CIRCLE_TAG
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build_master:
+          context: org-global
+          filters:
+            branches:
+              only: master
+      - build_tag:
+          context: org-global
+          filters:
+            tags:
+              only: /v.*/
+            branches:
+              ignore: /.*/
