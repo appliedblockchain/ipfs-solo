@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  ipfs:
+    image: appliedblockchain/ipfs-solo:latest
+    volumes:
+      - ipfs-data:/data/ipfs/blocks
+volumes:
+  ipfs-data:
