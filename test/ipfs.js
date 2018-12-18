@@ -27,9 +27,18 @@ module.exports = {
     })
   },
 
+  rm: async (hash) => {
+    await ipfs.pin.rm(hash)
+    ipfs.repo.gc()
+  },
+
 
   store: async (value) => {
     const ipfs_res = await ipfs.add(Buffer.from(value, 'utf8'))
-    return ipfs_res[0].hash
+    const hash = ipfs_res[0].hash
+
+    await ipfs.pin.add(hash)
+
+    return hash
   }
 }

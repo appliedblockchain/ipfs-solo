@@ -2,6 +2,7 @@ const ipfs = require('./ipfs.js')
 const expect = require('chai').expect
 
 describe('Simple test to check that ipfs is working', () => {
+
   it('Can store a string that we can retrieve later', async () => {
     const value = 'test1234jngskljdh22323'
 
@@ -11,4 +12,5 @@ describe('Simple test to check that ipfs is working', () => {
 
     expect(storedValue).to.equal(value)
   })
+
 })
